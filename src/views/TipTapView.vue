@@ -83,7 +83,7 @@
     <editor-content :editor="editor" />
 </template>
   
-<script>
+<script lang="ts">
 import StarterKit from '@tiptap/starter-kit'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 
