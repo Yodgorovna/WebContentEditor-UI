@@ -84,17 +84,19 @@
 </template>
   
 <script lang="ts">
+import { defineComponent } from 'vue'
+
 import StarterKit from '@tiptap/starter-kit'
 import { Editor, EditorContent } from '@tiptap/vue-3'
 
-export default {
+export default defineComponent({
     components: {
         EditorContent,
     },
 
     data() {
         return {
-            editor: null,
+            editor: null as any,
         }
     },
 
@@ -137,9 +139,10 @@ export default {
     },
 
     beforeUnmount() {
+        // @ts-ignore
         this.editor.destroy()
     },
-}
+})
 </script>
   
 <style >

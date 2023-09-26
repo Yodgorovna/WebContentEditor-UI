@@ -3,8 +3,12 @@
 </template>
   
 <script lang="ts">
+// @ts-ignore
 import Wangeditor from "wangeditor";
-export default {
+import { defineComponent } from 'vue'
+
+
+export default defineComponent({
     name: "Vue2WangEditor",
     model: {
         prop: "value",
@@ -90,15 +94,17 @@ export default {
     },
     data() {
         return {
-            editor: null,
+            editor: null as any,
             editorValue: null,
         };
     },
     watch: {
         disabled(value) {
             if (value) {
+                // @ts-ignore
                 this.editor.disable();
             } else {
+                // @ts-ignore
                 this.editor.enable();
             }
         },
@@ -112,6 +118,7 @@ export default {
         this.initEditor();
     },
     beforeDestroy() {
+        // @ts-ignore
         this.editor.destroy();
         this.editor = null;
     },
@@ -120,7 +127,7 @@ export default {
          * 初始化编辑器
          */
         initEditor() {
-            const editor = new Wangeditor(this.$el);
+            const editor: any = new Wangeditor(this.$el);
 
             // config
             for (const [key, value] of Object.entries(this.$props)) {
@@ -141,7 +148,7 @@ export default {
             }
 
             setTimeout(() => {
-                editor.config.onchange = (html) => {
+                editor.config.onchange = (html: any) => {
                     this.editorValue = html;
                     this.$emit("change", html);
                 };
@@ -149,10 +156,11 @@ export default {
         },
 
 
-        writeValue(value) {
+        writeValue(value: any) {
+            // @ts-ignore
             this.editor?.txt.html(value || "");
         },
     },
-};
+})
 </script>
   
